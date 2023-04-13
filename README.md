@@ -1,1 +1,1 @@
-# estructuraDeDatosJS
+# Curso de estructuraDeDatosJS
