@@ -43,7 +43,7 @@ class MyDoublyLinkedList {
             return this.prepend(value);
         } 
         const newNode = new Node(value);
-        const firstPointer = this.getIndex(index).prev;
+        const firstPointer = this.getIndex(index -1);
         const holdingPointer = firstPointer.next;
         firstPointer.next = newNode;
         newNode.next = holdingPointer;
@@ -54,8 +54,8 @@ class MyDoublyLinkedList {
     }
 
     getIndex(index) {
-        const counter = 0;
-        const currentNode = this.head;
+        let counter = 0;
+        let currentNode = this.head;
         while (counter !== index){
             currentNode = currentNode.next;
             counter++;
