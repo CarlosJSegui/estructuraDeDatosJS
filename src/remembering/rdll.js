@@ -6,7 +6,7 @@ class Node {
     }
 }
 
-class MyDoublyLinkedList {
+class DoublyLinkedList {
     constructor(value) {
         this.head = {
             value: value,
@@ -39,38 +39,38 @@ class MyDoublyLinkedList {
     insert(index, value) {
         if(index >= this.length) {
             return this.append(value);
-        } else if (index === 0) {
+        } else if(index === 0) {
             return this.prepend(value);
         } 
         const newNode = new Node(value);
-        const firstPointer = this.getIndex(index -1);
+        const firstPointer = this.getIndex(index - 1);
         const holdingPointer = firstPointer.next;
-        holdingPointer.prev = newNode;
         firstPointer.next = newNode;
+        holdingPointer.prev = newNode;
         newNode.next = holdingPointer;
         newNode.prev = firstPointer;
 
         this.length++;
-        return this
+        return this;
     }
 
     getIndex(index) {
         let counter = 0;
         let currentNode = this.head;
-        while (counter !== index){
+        while(counter !== index) {
             currentNode = currentNode.next;
             counter++;
         }
-        return currentNode
+        return currentNode;
     }
-    
-    remove (index) {
-        if(index >= this.length) {
-            return "Ese index es mayor que el tamaño de la lista"
-        } else if (index === 0) {
+
+    remove(index) {
+        if(index >= this.length || index < 0) {
+            return "Index out of bounds"
+        } else if(index === 0) {
             this.head = this.head.next;
             this.length--;
-        } else if (index === this.length -1) {
+        } else if(index === this.length - 1) {
             const anterior = this.getIndex(index -1);
             anterior.next = null;
             this.tail = anterior;
@@ -80,9 +80,11 @@ class MyDoublyLinkedList {
             const aBorrar = this.getIndex(index);
             const posterior = aBorrar.next;
             anterior.next = posterior;
+            posterior.prev = anterior;
+
             this.length--;
         }
     }
 }
 
-const newDoublyLinkedList = new MyDoublyLinkedList(1);
+let myDoubly = new DoublyLinkedList(1);
